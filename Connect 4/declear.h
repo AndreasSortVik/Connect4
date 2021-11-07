@@ -6,11 +6,12 @@
 #ifndef DECLEAR_H
 #define DECLEAR_H
 
-void emptyBoard();
 void playerGame();
 void player1Play();
 void player2Play();
 void AIGame();
+void checkWin();
+void buildBoard();
 void clearcin();
 
 //Board variables
@@ -22,10 +23,12 @@ char board[row][col] = { {'*', '*', '*', '*', '*', '*', '*'}, {'*', '*', '*', '*
 						{'*', '*', '*', '*', '*', '*', '*'}, {'*', '*', '*', '*', '*', '*', '*'} };
 
 //Player variables
-bool player1 = false;
-bool player2 = false;
+bool playerOneTurn = false;
+bool playerTwoTurn = false;
 bool AI = false;
-int input{};
+char input;
+char playerOne = 'X';
+char playerTwo = '0';
 std::string playerOneName;
 std::string playerTwoName;
 
