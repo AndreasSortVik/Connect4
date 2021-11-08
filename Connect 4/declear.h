@@ -26,10 +26,14 @@ char board[row][col] = { {'*', '*', '*', '*', '*', '*', '*'}, {'*', '*', '*', '*
 bool playerOneTurn = false;
 bool playerTwoTurn = false;
 bool AI = false;
-char input;
+int input;
 char playerOne = 'X';
 char playerTwo = '0';
 std::string playerOneName;
 std::string playerTwoName;
+
+//Check win variables
+int changedPieces{};
+bool endGame = false;
 
 #endif

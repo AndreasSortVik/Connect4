@@ -33,7 +33,7 @@ int main() {
 }
 
 void playerGame() {
-	while (true) {
+	while (endGame == false) {
 		player1Play();
 		player2Play();
 	}
@@ -49,174 +49,23 @@ void player1Play() {
 
 		input = _getch();
 
-		switch (input) {
-		case '1':
-			if (board[5][0] == '*') {
-				board[5][0] = playerOne;
-			}
-			else if (board[4][0] == '*') {
-				board[4][0] = playerOne;
-			}
-			else if (board[3][0] == '*') {
-				board[3][0] = playerOne;
-			}
-			else if (board[2][0] == '*') {
-				board[2][0] = playerOne;
-			}
-			else if (board[1][0] == '*') {
-				board[1][0] = playerOne;
-			}
-			else if (board[0][0] == '*') {
-				board[0][0] = playerOne;
+		/*This for-loop checks if a placement in the board is '*'. If it is, it will place the player's character. If not,
+		it will get the player to pick a column again.*/
+		for (int i = 5; i >= 0; i--) {
+			if (board[i][input - 49] == '*') {
+				board[i][input - 49] = playerOne;
+				playerOneTurn = false;
+				break;
 			}
 			else {
+				playerOneTurn = true;
 				continue;
 			}
-			break;
-		case '2':
-			if (board[5][1] == '*') {
-				board[5][1] = playerOne;
-			}
-			else if (board[4][1] == '*') {
-				board[4][1] = playerOne;
-			}
-			else if (board[3][1] == '*') {
-				board[3][1] = playerOne;
-			}
-			else if (board[2][1] == '*') {
-				board[2][1] = playerOne;
-			}
-			else if (board[1][1] == '*') {
-				board[1][1] = playerOne;
-			}
-			else if (board[0][1] == '*') {
-				board[0][1] = playerOne;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '3':
-			if (board[5][2] == '*') {
-				board[5][2] = playerOne;
-			}
-			else if (board[4][2] == '*') {
-				board[4][2] = playerOne;
-			}
-			else if (board[3][2] == '*') {
-				board[3][2] = playerOne;
-			}
-			else if (board[2][2] == '*') {
-				board[2][2] = playerOne;
-			}
-			else if (board[1][2] == '*') {
-				board[1][2] = playerOne;
-			}
-			else if (board[0][2] == '*') {
-				board[0][2] = playerOne;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '4':
-			if (board[5][3] == '*') {
-				board[5][3] = playerOne;
-			}
-			else if (board[4][3] == '*') {
-				board[4][3] = playerOne;
-			}
-			else if (board[3][3] == '*') {
-				board[3][3] = playerOne;
-			}
-			else if (board[2][3] == '*') {
-				board[2][3] = playerOne;
-			}
-			else if (board[1][3] == '*') {
-				board[1][3] = playerOne;
-			}
-			else if (board[0][3] == '*') {
-				board[0][3] = playerOne;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '5':
-			if (board[5][4] == '*') {
-				board[5][4] = playerOne;
-			}
-			else if (board[4][4] == '*') {
-				board[4][4] = playerOne;
-			}
-			else if (board[3][4] == '*') {
-				board[3][4] = playerOne;
-			}
-			else if (board[2][4] == '*') {
-				board[2][4] = playerOne;
-			}
-			else if (board[1][4] == '*') {
-				board[1][4] = playerOne;
-			}
-			else if (board[0][4] == '*') {
-				board[0][4] = playerOne;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '6':
-			if (board[5][5] == '*') {
-				board[5][5] = playerOne;
-			}
-			else if (board[4][5] == '*') {
-				board[4][5] = playerOne;
-			}
-			else if (board[3][5] == '*') {
-				board[3][5] = playerOne;
-			}
-			else if (board[2][5] == '*') {
-				board[2][5] = playerOne;
-			}
-			else if (board[1][5] == '*') {
-				board[1][5] = playerOne;
-			}
-			else if (board[0][5] == '*') {
-				board[0][5] = playerOne;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '7':
-			if (board[5][6] == '*') {
-				board[5][6] = playerOne;
-			}
-			else if (board[4][6] == '*') {
-				board[4][6] = playerOne;
-			}
-			else if (board[3][6] == '*') {
-				board[3][6] = playerOne;
-			}
-			else if (board[2][6] == '*') {
-				board[2][6] = playerOne;
-			}
-			else if (board[1][6] == '*') {
-				board[1][6] = playerOne;
-			}
-			else if (board[0][6] == '*') {
-				board[0][6] = playerOne;
-			}
-			else {
-				continue;
-			}
-			break;
-		default:
-			continue;
 		}
-		
-		playerOneTurn = false;
+
+		checkWin();
 		playerTwoTurn = true;
+		
 	}
 
 	return;
@@ -230,174 +79,22 @@ void player2Play() {
 
 		input = _getch();
 
-		switch (input) {
-		case '1':
-			if (board[5][0] == '*') {
-				board[5][0] = playerTwo;
-			}
-			else if (board[4][0] == '*') {
-				board[4][0] = playerTwo;
-			}
-			else if (board[3][0] == '*') {
-				board[3][0] = playerTwo;
-			}
-			else if (board[2][0] == '*') {
-				board[2][0] = playerTwo;
-			}
-			else if (board[1][0] == '*') {
-				board[1][0] = playerTwo;
-			}
-			else if (board[0][0] == '*') {
-				board[0][0] = playerTwo;
+		/*This for-loop checks if a placement in the board is '*'. If it is, it will place the player's character. If not,
+		it will get the player to pick a column again.*/
+		for (int i = 5; i >= 0; i--) {
+			if (board[i][input - 49] == '*') {
+				board[i][input - 49] = playerTwo;
+				playerTwoTurn = false;
+				break;
 			}
 			else {
+				playerTwoTurn = true;
 				continue;
 			}
-			break;
-		case '2':
-			if (board[5][1] == '*') {
-				board[5][1] = playerTwo;
-			}
-			else if (board[4][1] == '*') {
-				board[4][1] = playerTwo;
-			}
-			else if (board[3][1] == '*') {
-				board[3][1] = playerTwo;
-			}
-			else if (board[2][1] == '*') {
-				board[2][1] = playerTwo;
-			}
-			else if (board[1][1] == '*') {
-				board[1][1] = playerTwo;
-			}
-			else if (board[0][1] == '*') {
-				board[0][1] = playerTwo;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '3':
-			if (board[5][2] == '*') {
-				board[5][2] = playerTwo;
-			}
-			else if (board[4][2] == '*') {
-				board[4][2] = playerTwo;
-			}
-			else if (board[3][2] == '*') {
-				board[3][2] = playerTwo;
-			}
-			else if (board[2][2] == '*') {
-				board[2][2] = playerTwo;
-			}
-			else if (board[1][2] == '*') {
-				board[1][2] = playerTwo;
-			}
-			else if (board[0][2] == '*') {
-				board[0][2] = playerTwo;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '4':
-			if (board[5][3] == '*') {
-				board[5][3] = playerTwo;
-			}
-			else if (board[4][3] == '*') {
-				board[4][3] = playerTwo;
-			}
-			else if (board[3][3] == '*') {
-				board[3][3] = playerTwo;
-			}
-			else if (board[2][3] == '*') {
-				board[2][3] = playerTwo;
-			}
-			else if (board[1][3] == '*') {
-				board[1][3] = playerTwo;
-			}
-			else if (board[0][3] == '*') {
-				board[0][3] = playerTwo;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '5':
-			if (board[5][4] == '*') {
-				board[5][4] = playerTwo;
-			}
-			else if (board[4][4] == '*') {
-				board[4][4] = playerTwo;
-			}
-			else if (board[3][4] == '*') {
-				board[3][4] = playerTwo;
-			}
-			else if (board[2][4] == '*') {
-				board[2][4] = playerTwo;
-			}
-			else if (board[1][4] == '*') {
-				board[1][4] = playerTwo;
-			}
-			else if (board[0][4] == '*') {
-				board[0][4] = playerTwo;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '6':
-			if (board[5][5] == '*') {
-				board[5][5] = playerTwo;
-			}
-			else if (board[4][5] == '*') {
-				board[4][5] = playerTwo;
-			}
-			else if (board[3][5] == '*') {
-				board[3][5] = playerTwo;
-			}
-			else if (board[2][5] == '*') {
-				board[2][5] = playerTwo;
-			}
-			else if (board[1][5] == '*') {
-				board[1][5] = playerTwo;
-			}
-			else if (board[0][5] == '*') {
-				board[0][5] = playerTwo;
-			}
-			else {
-				continue;
-			}
-			break;
-		case '7':
-			if (board[5][6] == '*') {
-				board[5][6] = playerTwo;
-			}
-			else if (board[4][6] == '*') {
-				board[4][6] = playerTwo;
-			}
-			else if (board[3][6] == '*') {
-				board[3][6] = playerTwo;
-			}
-			else if (board[2][6] == '*') {
-				board[2][6] = playerTwo;
-			}
-			else if (board[1][6] == '*') {
-				board[1][6] = playerTwo;
-			}
-			else if (board[0][6] == '*') {
-				board[0][6] = playerTwo;
-			}
-			else {
-				continue;
-			}
-			break;
-		default:
-			continue;
 		}
 
+		checkWin();
 		playerOneTurn = true;
-		playerTwoTurn = false;
 	}
 
 	return;
@@ -410,7 +107,19 @@ void AIGame() {
 }
 
 void checkWin() {
-	
+	for (int i = 0; i < row; i++) {
+		for (int j = 0; j < col; j++) {
+			if (board[i][j] == playerOne || board[i][j] == playerTwo) {
+				changedPieces++;
+			}
+		}
+	}
+	if (changedPieces == 42) {
+		std::cout << "The game came to a draw" << std::endl;
+		endGame = true;
+	}
+
+	return;
 }
 
 void buildBoard() {
