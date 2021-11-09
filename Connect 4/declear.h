@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <conio.h>
+#include <stdlib.h>
+#include <time.h>
 #pragma once
 
 #ifndef DECLEAR_H
@@ -11,6 +13,7 @@ void player1Play();
 void player2Play();
 void AIGame();
 void checkWin();
+void endGame();
 void buildBoard();
 void clearcin();
 
@@ -32,8 +35,10 @@ char playerTwo = '0';
 std::string playerOneName;
 std::string playerTwoName;
 
+//AI variables
+
+
 //Check win variables
-int changedPieces{};
-bool endGame = false;
+int winner{}; //If winner = 1, playerOne won. If winner = 2, playerTwo won
 
 #endif

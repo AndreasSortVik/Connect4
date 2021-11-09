@@ -1,6 +1,7 @@
 #include "declear.h"
 
 int main() {
+	std::srand(std::time(nullptr));
 	while (true) {
 		std::cout << "If you want to play against AI, make player 2's name 'AI'" << std::endl;
 		std::cout << "Player 1 name: ";
@@ -33,9 +34,11 @@ int main() {
 }
 
 void playerGame() {
-	while (endGame == false) {
+	while (true) {
 		player1Play();
+		checkWin();
 		player2Play();
+		checkWin();
 	}
 
 	return;
@@ -44,7 +47,7 @@ void playerGame() {
 void player1Play() {
 	while (playerOneTurn == true) {
 		system("cls");
-		std::cout << "It is time for '" << playerOneName << "' to take their turn." << std::endl;
+		std::cout << "It is time for " << playerOneName << " to take their turn." << std::endl;
 		buildBoard();
 
 		input = _getch();
@@ -63,7 +66,6 @@ void player1Play() {
 			}
 		}
 
-		checkWin();
 		playerTwoTurn = true;
 		
 	}
@@ -74,7 +76,7 @@ void player1Play() {
 void player2Play() {
 	while (playerTwoTurn == true) {
 		system("cls");
-		std::cout << "It is time for '" << playerTwoName << "' to take their turn." << std::endl;
+		std::cout << "It is time for " << playerTwoName << " to take their turn." << std::endl;
 		buildBoard();
 
 		input = _getch();
@@ -93,7 +95,6 @@ void player2Play() {
 			}
 		}
 
-		checkWin();
 		playerOneTurn = true;
 	}
 
@@ -107,17 +108,79 @@ void AIGame() {
 }
 
 void checkWin() {
-	for (int i = 0; i < row; i++) {
-		for (int j = 0; j < col; j++) {
-			if (board[i][j] == playerOne || board[i][j] == playerTwo) {
-				changedPieces++;
+	//Vertical wins
+	for (int i = 5; i >= 0; i--) {
+		for (int j = 6; j >= 0; j--) {
+			//Vertical win for playerOne
+			if (board[i][j] == playerOne && board[i - 1][j] == playerOne && board[i - 2][j] == playerOne && board[i - 3][j] == playerOne) {
+				winner = 1;
+				endGame();
+			}
+			//Vertical win for playerTwo
+			if (board[i][j] == playerTwo && board[i - 1][j] == playerTwo && board[i - 2][j] == playerTwo && board[i - 3][j] == playerTwo) {
+				winner = 2;
+				endGame();
 			}
 		}
 	}
-	if (changedPieces == 42) {
-		std::cout << "The game came to a draw" << std::endl;
-		endGame = true;
+
+	//Horizontal wins
+	for (int i = 0; i < row; i++) {
+		for (int j = 0; j < col; j++) {
+			//Horizontal win for playerOne
+			if (board[j][i] == playerOne && board[j][i + 1] == playerOne && board[j][i + 2] == playerOne && board[j][i + 3] == playerOne) {
+				winner = 1;
+				endGame();
+			}
+			//Horizontal win for playerTwo
+			if (board[j][i] == playerTwo && board[j][i + 1] == playerTwo && board[j][i + 2] == playerTwo && board[j][i + 3] == playerTwo) {
+				winner = 2;
+				endGame();
+			}
+		}
 	}
+
+	//Diagonal wins
+	for (int i = 5; i >= 0; i--) {
+		for (int j = 6; j >= 0; j--) {
+			//Vertical win for playerOne
+			if (board[i][j] == playerOne && board[i - 1][j - 1] == playerOne && board[i - 2][j - 2] == playerOne && board[i - 3][j - 3] == playerOne) {
+				winner = 1;
+				endGame();
+			}
+			if (board[i][j] == playerOne && board[i - 1][j + 1] == playerOne && board[i - 2][j + 2] == playerOne && board[i - 3][j + 3] == playerOne) {
+				winner = 1;
+				endGame();
+			}
+			//Diagonal win for playerTwo
+			if (board[i][j] == playerTwo && board[i - 1][j - 1] == playerTwo && board[i - 2][j - 2] == playerTwo && board[i - 3][j - 3] == playerTwo) {
+				winner = 2;
+				endGame();
+			}
+			if (board[i][j] == playerTwo && board[i - 1][j + 1] == playerTwo && board[i - 2][j + 2] == playerTwo && board[i - 3][j + 3] == playerTwo) {
+				winner = 2;
+				endGame();
+			}
+		}
+	}
+
+	return;
+}
+
+void endGame() {
+	system("cls");
+	buildBoard();
+
+	if (winner == 1) {
+		std::cout << playerOneName << " won the game." << std::endl;
+		//Update and display current amount of wins for playerOne from file
+	}
+	if (winner == 2) {
+		std::cout << playerTwoName << " won the game." << std::endl;
+		//Update and display current amount of wins for playerTwo from file
+	}
+
+	exit(0); //Make it so it is possible to start a new game
 
 	return;
 }
